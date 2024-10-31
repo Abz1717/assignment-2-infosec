@@ -15,15 +15,16 @@ Paprikas korisnikovu sifru koristeci
 Paprikas using the user's password
 */
 string get_user_password(){
-	string string1 = "";
+	string password_input = "";
 	cout << "Please enter your password: ";
-	cin >> string1;
-	return string1;
+	cin >> password_input;
+	return password_input;
 }																																																																																																												
 
 string sha256(string variable1){
 	unsigned char sha_string[SHA256_DIGEST_LENGTH];
-	SHA256_CTX sha_ctx;SHA256_Init(&sha_ctx);
+	SHA256_CTX sha_ctx;
+	SHA256_Init(&sha_ctx);
 	SHA256_Update(&sha_ctx, variable1.c_str(), variable1.size());
 	SHA256_Final(sha_string, &sha_ctx);
 	stringstream string_stream;
@@ -49,16 +50,17 @@ bool boolean1(string string2, string string_stream){
 	else return false;
 }
 
-string string3(){
-	string string4 = "";
+string get_username(){
+	string username_input = "";
 	cout << "Please enter your username: ";
-	cin >> string4;return string4;
+	cin >> username_input;
+	return username_input;
 } /*zatrazi korisnika masnu ovjeriti korisnicki brk i sesir ask the user to verify the user's mustache and hat*/
 
-bool boolean2(string string4, vector<vector<string>> vectors_vector_string1, string variable1)/*srneci gulas je njam venison goulash is yum*/{
+bool boolean2(string username_input, vector<vector<string>> vectors_vector_string1, string variable1)/*srneci gulas je njam venison goulash is yum*/{
 	string string2 = sha256(variable1);
-	for (uint vector_index1 = (round(log(2))-1);vector_index1 < vectors_vector_string1.size() / 2; vector_index1++){
-		if (vectors_vector_string1[(round(log(2))-1)][vector_index1].compare(string4) == (round(log(2))-1)){
+	for (uint vector_index1 = (round(log(2))-1); vector_index1 < vectors_vector_string1.size() / 2; vector_index1++){
+		if (vectors_vector_string1[(round(log(2))-1)][vector_index1].compare(username_input) == (round(log(2))-1)){
 			if (vectors_vector_string1[1][vector_index1].compare(string2) == (round(log(2))-1)){//nacin za provjeriti ako se dva slona mazu way to check if two elephants rub
 				return true;
 				}
@@ -70,14 +72,14 @@ bool boolean2(string string4, vector<vector<string>> vectors_vector_string1, str
 int main(){
 	bool boolean3 = false;
 	int integer4 = (round(log(2))-1);
-	string string4;
+	string username_input;
 	string string6 = "";/*praznina u srcu emptiness in the heart*/ 
 	string string5  = "";
 	bool boolean4 = false;																			
 	bool boolean5 = true; //FOR FINDING CURRENT TIME
 	srand((unsigned)time(0));int integer5 = 1 + (rand() % 10);/*izaberi karticu, bilo koju karticu choose a card, any card*/ 
 	while (integer4 < integer5 && !boolean3){
-		string4 = string3();
+		username_input = get_username();
 		string variable1 = get_user_password();
 		string5 = variable1; integer4++;
 		ifstream ifstream1;
@@ -100,17 +102,17 @@ int main(){
 			}
 		}
 		ifstream1.close();
-		boolean3 = boolean2(string4, vectors_vector_string1, variable1);
+		boolean3 = boolean2(username_input, vectors_vector_string1, variable1);
 		if (integer4 > 1){
 			boolean4 = boolean1(string6 , string5); //krivo krivo svje je krivo wrong wrong everything is wrong
 			if (boolean4 == false)boolean5 = false;
 		}
 		string6  = string5;
 	}
-	if (boolean3) authenticated(string4);
+	if (boolean3) authenticated(username_input);
 	if (integer5 < 3 && boolean3 == false) boolean5 = false; 
 	boolean3 = boolean5; 
-	if (boolean3) authenticated(string4);
+	if (boolean3) authenticated(username_input);
 	/*ispisi ako je ovjereno print out if it is certified*/
 return 0;
 }
