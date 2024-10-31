@@ -12,25 +12,105 @@
 using namespace std;
 /*
 Paprikas korisnikovu sifru koristeci
+Paprikas using the user's password
 */
-string Il111lII111Il11(){string IllII1l1lIllIl1 = "";cout << "Please enter your password: ";cin >> IllII1l1lIllIl1;return IllII1l1lIllIl1;}																																																																																																												string IIl11lII111I111(string IlII1lIIllIlI1)
-{unsigned char IlII1lIIllIIl1[SHA256_DIGEST_LENGTH];SHA256_CTX Il1I1lIIllIl1;SHA256_Init(&Il1I1lIIllIl1);SHA256_Update(&Il1I1lIIllIl1, IlII1lIIllIlI1.c_str(), IlII1lIIllIlI1.size());SHA256_Final(IlII1lIIllIIl1, &Il1I1lIIllIl1);
-stringstream IllII1lIIllIl1;for (int IllII1lIIllIlI1 = (round(log(2))-1); IllII1lIIllIlI1 < SHA256_DIGEST_LENGTH; IllII1lIIllIlI1++){IllII1lIIllIl1 << hex << setw(2) << setfill('0') << (int)IlII1lIIllIIl1[IllII1lIIllIlI1];}
-return IllII1lIIllIl1.str();} bool Il111lIIlI1Il11(string IlIlI1l1lIlllIl1, string IllII1lIIllIl1){	int IllII1lII1lIl1 = (round(log(2))-1);int IllI11lII1lIl1 = (round(log(2))-1);
-if (IlIlI1l1lIlllIl1 == IllII1lIIllIl1)
-	return false; //volim sir i sunku
-for(uint IllI11l1II1lI1 = (round(log(2))-1); IllI11l1II1lI1<IlIlI1l1lIlllIl1.length(); IllI11l1II1lI1++) {
-IllII1lII1lIl1 = IllII1lII1lIl1 + IlIlI1l1lIlllIl1[IllI11l1II1lI1];} for(uint IllI11l1II1lI1 = (round(log(2))-1); IllI11l1II1lI1<IllII1lIIllIl1.length(); IllI11l1II1lI1++) {
-IllI11lII1lIl1 = IllI11lII1lIl1+ IllII1lIIllIl1[IllI11l1II1lI1];} if (IllII1lII1lIl1 <= 650 || IllI11lII1lIl1 <= 650) return false;if (IllII1lII1lIl1 == IllI11lII1lIl1 && IlIlI1l1lIlllIl1.length() != IllII1lIIllIl1.length()) return true; else return false;
-}string Il111lII111I111(){	string IllII1llIllIl1 = "";cout << "Please enter your username: ";cin >> IllII1llIllIl1;return IllII1llIllIl1;} /*zatrazi korisnika masnu ovjeriti korisnicki brk i sesir*/
-bool Il111lIIll1Il11(string IllII1llIllIl1, vector<vector<string>> IllIlI1l1lIllIl1, string IlII1lIIllIlI1)/*srneci gulas je njam*/{string IlIlI1l1lIlllIl1 = IIl11lII111I111(IlII1lIIllIlI1);for (uint IlIlI1l1lIllIl11 = (round(log(2))-1);IlIlI1l1lIllIl11 < IllIlI1l1lIllIl1.size() / 2; IlIlI1l1lIllIl11++){
-if (IllIlI1l1lIllIl1[(round(log(2))-1)][IlIlI1l1lIllIl11].compare(IllII1llIllIl1) == (round(log(2))-1)){if (IllIlI1l1lIllIl1[1][IlIlI1l1lIllIl11].compare(IlIlI1l1lIlllIl1) == (round(log(2))-1))//nacin za provjeriti ako se dva slona mazu
-{return true;}}}return false;}int main(){bool IllI11l1I1lI1 = false;int Ill111l1I1lI1 = (round(log(2))-1);string IllII1llIllIl1;string Ill111l11llI1 = "";/*praznina u srcu*/ string Ill111lI1llI1  = "";bool IIl111lI1llI1 = false;																																																																																											 bool IIl11llI1llI1 = true; //FOR FINDING CURRENT TIME
-srand((unsigned)time(0));int IIl11llI1llIl1 = 1 + (rand() % 10);/*izaberi karticu, bilo koju karticu*/ while (Ill111l1I1lI1 < IIl11llI1llIl1 && !IllI11l1I1lI1){IllII1llIllIl1 = Il111lII111I111();string IlII1lIIllIlI1 = Il111lII111Il11();
-Ill111lI1llI1 = IlII1lIIllIlI1; Ill111l1I1lI1++;ifstream IIl11llI11llI1;vector<vector<string>> IllIlI1l1lIllIl1;IIl11llI11llI1.open("passwords.txt");if (!IIl11llI11llI1){cout << "Unable to open file";} //nece raditi danas
-string IIl11lII1I111;while (IIl11llI11llI1 >> IIl11lII1I111){stringstream splitUserData(IIl11lII1I111);vector<string> IIl11lI11llI1;int Il111lIIlI1Il11 = (round(log(2))-1);while (splitUserData.good() && Il111lIIlI1Il11 < (round(log(2))-1)+2){ // provjeri sve uvijek maslo
-string IIl11lII1llI1 = "";getline(splitUserData, IIl11lII1llI1, ':');/*rastavljamo se danas*/IllIlI1l1lIllIl1.push_back(IIl11lI11llI1);IllIlI1l1lIllIl1[Il111lIIlI1Il11].push_back(IIl11lII1llI1);Il111lIIlI1Il11++;}}
-IIl11llI11llI1.close();IllI11l1I1lI1 = Il111lIIll1Il11(IllII1llIllIl1, IllIlI1l1lIllIl1, IlII1lIIllIlI1);if (Ill111l1I1lI1 > 1){IIl111lI1llI1 = Il111lIIlI1Il11(Ill111l11llI1 , Ill111lI1llI1); //krivo krivo svje je krivo
-if (IIl111lI1llI1 == false)IIl11llI1llI1 = false;}Ill111l11llI1  = Ill111lI1llI1;}if (IllI11l1I1lI1) authenticated(IllII1llIllIl1); if (IIl11llI1llIl1 < 3 && IllI11l1I1lI1 == false) IIl11llI1llI1 = false; IllI11l1I1lI1 = IIl11llI1llI1; if (IllI11l1I1lI1) authenticated(IllII1llIllIl1);
-/*ispisi ako je ovjereno*/return 0;
+string get_user_password(){
+	string string1 = "";
+	cout << "Please enter your password: ";
+	cin >> string1;
+	return string1;
+}																																																																																																												
+
+string sha256(string variable1){
+	unsigned char sha_string[SHA256_DIGEST_LENGTH];
+	SHA256_CTX sha_ctx;SHA256_Init(&sha_ctx);
+	SHA256_Update(&sha_ctx, variable1.c_str(), variable1.size());
+	SHA256_Final(sha_string, &sha_ctx);
+	stringstream string_stream;
+	for (int integer1 = (round(log(2))-1); integer1 < SHA256_DIGEST_LENGTH; integer1++){
+		string_stream << hex << setw(2) << setfill('0') << (int)sha_string[integer1];
+	}
+	return string_stream.str();
+}
+
+bool boolean1(string string2, string string_stream){
+	int integer2 = (round(log(2))-1);
+	int integer3 = (round(log(2))-1);
+	if (string2 == string_stream)
+		return false; //volim sir i sunku I love cheese and ham
+	for(uint uint1 = (round(log(2))-1); uint1<string2.length(); uint1++){
+		integer2 = integer2 + string2[uint1];
+	}
+	for(uint uint1 = (round(log(2))-1); uint1<string_stream.length(); uint1++) {
+		integer3 = integer3+ string_stream[uint1];
+	}
+	if (integer2 <= 650 || integer3 <= 650) return false;
+	if (integer2 == integer3 && string2.length() != string_stream.length()) return true; 
+	else return false;
+}
+
+string string3(){
+	string string4 = "";
+	cout << "Please enter your username: ";
+	cin >> string4;return string4;
+} /*zatrazi korisnika masnu ovjeriti korisnicki brk i sesir ask the user to verify the user's mustache and hat*/
+
+bool boolean2(string string4, vector<vector<string>> vectors_vector_string1, string variable1)/*srneci gulas je njam venison goulash is yum*/{
+	string string2 = sha256(variable1);
+	for (uint vector_index1 = (round(log(2))-1);vector_index1 < vectors_vector_string1.size() / 2; vector_index1++){
+		if (vectors_vector_string1[(round(log(2))-1)][vector_index1].compare(string4) == (round(log(2))-1)){
+			if (vectors_vector_string1[1][vector_index1].compare(string2) == (round(log(2))-1)){//nacin za provjeriti ako se dva slona mazu way to check if two elephants rub
+				return true;
+				}
+		}
+	}
+		return false;
+}
+	
+int main(){
+	bool boolean3 = false;
+	int integer4 = (round(log(2))-1);
+	string string4;
+	string string6 = "";/*praznina u srcu emptiness in the heart*/ 
+	string string5  = "";
+	bool boolean4 = false;																			
+	bool boolean5 = true; //FOR FINDING CURRENT TIME
+	srand((unsigned)time(0));int integer5 = 1 + (rand() % 10);/*izaberi karticu, bilo koju karticu choose a card, any card*/ 
+	while (integer4 < integer5 && !boolean3){
+		string4 = string3();
+		string variable1 = get_user_password();
+		string5 = variable1; integer4++;
+		ifstream ifstream1;
+		vector<vector<string>> vectors_vector_string1;
+		ifstream1.open("passwords.txt");
+		if (!ifstream1){
+			cout << "Unable to open file";
+		} //nece raditi danas it won't work today
+		string string7;
+		while (ifstream1 >> string7){
+			stringstream splitUserData(string7);
+			vector<string> vector_string1;
+			int boolean1 = (round(log(2))-1);
+			while (splitUserData.good() && boolean1 < (round(log(2))-1)+2){ // provjeri sve uvijek maslo check everything always oil
+			string string7 = "";
+			getline(splitUserData, string7, ':');
+			/*rastavljamo se danas we are parting today*/
+			vectors_vector_string1.push_back(vector_string1);
+			vectors_vector_string1[boolean1].push_back(string7);boolean1++;
+			}
+		}
+		ifstream1.close();
+		boolean3 = boolean2(string4, vectors_vector_string1, variable1);
+		if (integer4 > 1){
+			boolean4 = boolean1(string6 , string5); //krivo krivo svje je krivo wrong wrong everything is wrong
+			if (boolean4 == false)boolean5 = false;
+		}
+		string6  = string5;
+	}
+	if (boolean3) authenticated(string4);
+	if (integer5 < 3 && boolean3 == false) boolean5 = false; 
+	boolean3 = boolean5; 
+	if (boolean3) authenticated(string4);
+	/*ispisi ako je ovjereno print out if it is certified*/
+return 0;
 }
