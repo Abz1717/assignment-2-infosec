@@ -16,7 +16,8 @@ login-tmp.cpp: login.cpp
 
 login.o: login-tmp.cpp
 	$(C) $(CPPFLAGS) $(OPENSSL_FLAGS) -c $< -o $@ 
-	rm -f $<
+
+#	rm -f $< (removed from above)
 
 login: login.o authlib.o
 	$(C) $(CPPFLAGS) $^ $(LDFLAGS) -o $@
