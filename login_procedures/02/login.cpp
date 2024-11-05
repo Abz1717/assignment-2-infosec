@@ -34,19 +34,22 @@ string sha256(string blank_user_input){
 	return string_stream.str();
 }
 
-bool number_of_lines_read(string string2, string string_stream){
-	int integer2 = 0;
-	int integer3 = 0;
-	if (string2 == string_stream)
+//return false if strings match
+bool compare_ascii_value(string string1, string string2){
+	int ascii_value_string1 = 0;
+	int ascii_value_string2 = 0;
+	if (string1 == string2)
 		return false; //volim sir i sunku I love cheese and ham
-	for(uint uint1 = 0; uint1<string2.length(); uint1++){
-		integer2 = integer2 + string2[uint1];
+	for(uint uint1 = 0; uint1<string1.length(); uint1++){
+		ascii_value_string1 = ascii_value_string1 + string1[uint1];
 	}
-	for(uint uint1 = 0; uint1<string_stream.length(); uint1++) {
-		integer3 = integer3+ string_stream[uint1];
+	for(uint uint1 = 0; uint1<string2.length(); uint1++) {
+		ascii_value_string2 = ascii_value_string2 + string2[uint1];
 	}
-	if (integer2 <= 650 || integer3 <= 650) return false;
-	if (integer2 == integer3 && string2.length() != string_stream.length()) return true;
+	std::cout << "ASCII_1:" << ascii_value_string1 << "\n";
+	std::cout << "ASCII_2:" << ascii_value_string2 << "\n";
+	if (ascii_value_string1 <= 650 || ascii_value_string2 <= 650) return false;
+	if (ascii_value_string1 == ascii_value_string2 && string1.length() != string2.length()) return true;
 	else return false;
 }
 
@@ -76,16 +79,18 @@ int main(){
 	bool should_be_authenticated = false;
 	int login_attempts_taken = 0;
 	string username_input;
-	string string6 = "";/*praznina u srcu emptiness in the heart*/ 
-	string string5  = "";
+	string empty_string = "";/*praznina u srcu emptiness in the heart*/ 
+	string string_user_input_password  = "";
 	bool boolean4 = false;																			
 	bool boolean5 = true; //FOR FINDING CURRENT TIME
 	srand((unsigned)time(0));
+	//change login_attempts_allowed = 4 for demonstration purposes!
 	int login_attempts_allowed = 1 + (rand() % 10);/*izaberi karticu, bilo koju karticu choose a card, any card*/ 
+	std::cout << "Login attempts allowed: " << login_attempts_allowed << "\n";
 	while (login_attempts_taken < login_attempts_allowed && !should_be_authenticated){
 		username_input = get_username();
 		string blank_user_input = get_user_password();
-		string5 = blank_user_input; 
+		string_user_input_password = blank_user_input; 
 		login_attempts_taken++;
 		ifstream file_handler;
 		vector<vector<string>> password_file_content;
@@ -109,11 +114,13 @@ int main(){
 		}
 		file_handler.close();
 		should_be_authenticated = compare_passwords(username_input, password_file_content, blank_user_input);
-		if (login_attempts_taken > 1){
-			boolean4 = number_of_lines_read(string6 , string5); //krivo krivo svje je krivo wrong wrong everything is wrong
+		if (login_attempts_taken > 1){ //always true, right? -> after not at the first attempt
+			boolean4 = compare_ascii_value(empty_string , string_user_input_password);
+			std::cout << "ascii values match: " << boolean4 << "\n";//krivo krivo svje je krivo wrong wrong everything is wrong
 			if (boolean4 == false) boolean5 = false;
+			std::cout << "booean5:" << boolean5 << "\n";
 		}
-		string6  = string5;
+		empty_string  = string_user_input_password;
 	}
 
 	if (should_be_authenticated) authenticated(username_input);
@@ -123,3 +130,6 @@ int main(){
 	/*ispisi ako je ovjereno print out if it is certified*/
 return 0;
 }
+
+//ZZZZZZZZZZ
+//<<<<<<<<<<<<<<<
