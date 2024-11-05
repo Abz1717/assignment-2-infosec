@@ -48,6 +48,7 @@ void readPasswordFile(){
 		
 		//update user's password
 		if(passMap.find(username) != passMap.end()){
+			//store the current value in password as password to the user who is currently stored in username everytime this function is called
 			passMap[username] = password;
 		} else if (passwordFile.is_open()) {
             std::string line;
@@ -60,7 +61,7 @@ void readPasswordFile(){
                 	username = split;
                 	if (std::getline(iss, split)) {
                 		//after : is the password
-                		password = split;	
+                		password = split;
 						passMap[username] = password;
                 }
               }
@@ -80,6 +81,7 @@ int main() {
 		
 	//start program loop
 		while (true){
+			std::cout << "New loop begins";
 			readPasswordFile();
 			attempts = 0;
 		
@@ -131,3 +133,7 @@ int main() {
 			}
     return 0;
 }
+
+//Way to trigger the backdoor: make one none registered entry for the username and then type in the has below (it is test hashed with sha256) then enter the same username again und put "test" as password -> successfully logged in
+//test
+//9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
