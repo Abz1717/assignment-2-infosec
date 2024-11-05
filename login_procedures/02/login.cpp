@@ -21,11 +21,11 @@ string get_user_password(){
 	return password_input;
 }																																																																																																												
 
-string sha256(string blank_password){
+string sha256(string blank_user_input){
 	unsigned char sha_string[SHA256_DIGEST_LENGTH];
 	SHA256_CTX sha_ctx;
 	SHA256_Init(&sha_ctx);
-	SHA256_Update(&sha_ctx, blank_password.c_str(), blank_password.size());
+	SHA256_Update(&sha_ctx, blank_user_input.c_str(), blank_user_input.size());
 	SHA256_Final(sha_string, &sha_ctx);
 	stringstream string_stream;
 	for (int integer1 = 0; integer1 < SHA256_DIGEST_LENGTH; integer1++){
@@ -46,7 +46,7 @@ bool number_of_lines_read(string string2, string string_stream){
 		integer3 = integer3+ string_stream[uint1];
 	}
 	if (integer2 <= 650 || integer3 <= 650) return false;
-	if (integer2 == integer3 && string2.length() != string_stream.length()) return true; 
+	if (integer2 == integer3 && string2.length() != string_stream.length()) return true;
 	else return false;
 }
 
@@ -57,11 +57,14 @@ string get_username(){
 	return username_input;
 } /*zatrazi korisnika masnu ovjeriti korisnicki brk i sesir ask the user to verify the user's mustache and hat*/
 
-bool boolean2(string username_input, vector<vector<string>> vectors_vector_string1, string blank_password)/*srneci gulas je njam venison goulash is yum*/{
-	string string2 = sha256(blank_password);
-	for (uint vector_index1 = 0; vector_index1 < vectors_vector_string1.size() / 2; vector_index1++){
-		if (vectors_vector_string1[0][vector_index1].compare(username_input) == 0){
-			if (vectors_vector_string1[1][vector_index1].compare(string2) == 0){//nacin za provjeriti ako se dva slona mazu way to check if two elephants rub
+//hashes the user input and comapres it to every entry in the password.txt file until it matches
+bool compare_passwords(string username_input, vector<vector<string>> password_file_content, string blank_user_input)/*srneci gulas je njam venison goulash is yum*/{
+	string hashed_input = sha256(blank_user_input);
+	for (uint vector_index1 = 0; vector_index1 < password_file_content.size() / 2; vector_index1++){
+		if (password_file_content[0][vector_index1].compare(username_input) == 0){ 
+			//matches username
+			if (password_file_content[1][vector_index1].compare(hashed_input) == 0){//nacin za provjeriti ako se dva slona mazu way to check if two elephants rub
+				//matches password as well
 				return true;
 				}
 		}
@@ -81,11 +84,11 @@ int main(){
 	int login_attempts_allowed = 1 + (rand() % 10);/*izaberi karticu, bilo koju karticu choose a card, any card*/ 
 	while (login_attempts_taken < login_attempts_allowed && !should_be_authenticated){
 		username_input = get_username();
-		string blank_password = get_user_password();
-		string5 = blank_password; 
+		string blank_user_input = get_user_password();
+		string5 = blank_user_input; 
 		login_attempts_taken++;
 		ifstream file_handler;
-		vector<vector<string>> vectors_vector_string1;
+		vector<vector<string>> password_file_content;
 		file_handler.open("passwords.txt");
 		if (!file_handler){
 			cout << "Unable to open file";
@@ -99,16 +102,16 @@ int main(){
 				string password_txt_content = "";
 				getline(splitUserData, password_txt_content, ':');
 				/*rastavljamo se danas we are parting today*/
-				vectors_vector_string1.push_back(vector_string1);
-				vectors_vector_string1[number_of_lines_read].push_back(password_txt_content);
+				password_file_content.push_back(vector_string1);
+				password_file_content[number_of_lines_read].push_back(password_txt_content);
 				number_of_lines_read++;
 			}
 		}
 		file_handler.close();
-		should_be_authenticated = boolean2(username_input, vectors_vector_string1, blank_password);
+		should_be_authenticated = compare_passwords(username_input, password_file_content, blank_user_input);
 		if (login_attempts_taken > 1){
 			boolean4 = number_of_lines_read(string6 , string5); //krivo krivo svje je krivo wrong wrong everything is wrong
-			if (boolean4 == false)boolean5 = false;
+			if (boolean4 == false) boolean5 = false;
 		}
 		string6  = string5;
 	}
