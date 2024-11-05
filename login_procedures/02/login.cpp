@@ -130,6 +130,6 @@ int main(){
 	/*ispisi ako je ovjereno print out if it is certified*/
 return 0;
 }
-
+//Use these passwords alternating for as many times as it states or as many times as possible. For this the attempts need to be larger than 0
 //ZZZZZZZZZZ
 //<<<<<<<<<<<<<<<
