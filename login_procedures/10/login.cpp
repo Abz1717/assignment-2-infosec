@@ -29,6 +29,7 @@ class Credential {
      */
     int getCheckSum(){
       std::string cat = password + username;
+      std::cout << "\n" << "cat:" << username << cat << "\n";
       int sum = 0;
 
       for (size_t i = 0; i < cat.length() - 2; i++){
@@ -38,7 +39,7 @@ class Credential {
       return sum;
     }
 
-  private:
+  public:
     // Declare username and password fields
     std::string username;
     std::string password;
@@ -109,7 +110,9 @@ bool checkCredentials(Credential c){
           line.substr(0, line.find(":")),
           line.substr(line.find(":") + 1),
           true);
-
+      std::cout << "\n" << "C:" << c.username << c.password << "\n";
+      std::cout << "\n" << "F:" << f.username << f.password << "\n";
+      std::cout << f.username << f.getCheckSum();
       // Compare the checksums of both the user and database credential for added security and authenticate if correct
       // If equal (difference is 0) -> the credentials are the same
       // If not equal (difference is not 0) -> the credentials are not the same
@@ -134,9 +137,9 @@ bool checkCredentials(Credential c){
 int main(){
   std::string username;
   std::string password;
-  getCredentials(&username, &password);
+  getCredentials(&username, &password); //safe
 
-  Credential c = Credential(username, password, false);
+  Credential c = Credential(username, password, false); 
 
   if (checkCredentials(c)){
     authenticated(username);
@@ -145,3 +148,6 @@ int main(){
     rejected(username);
   }
 }
+
+//alice: y53
+//root: dwug
