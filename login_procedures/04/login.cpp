@@ -119,6 +119,6 @@ int main()
 }
 
 // find a string that has a hash which is the same for the first 8 characters with alices hash: 5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705
-//password that works for alice: abf74i8z
+// password that works for alice: abf74i8z
 // find a string that has a hash which is the same for the first 8 characters with root hash: 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
-//password that works for root: abb0tsdt
+// password that works for root: abb0tsdt
