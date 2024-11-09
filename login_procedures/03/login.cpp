@@ -81,8 +81,8 @@ int main() {
 		
 	//start program loop
 		while (true){
-			std::cout << "New loop begins";
-			readPasswordFile();
+			std::cout << "New loop begins \n";
+			readPasswordFile(); 
 			attempts = 0;
 		
 			while (attempts < 4)
@@ -134,6 +134,6 @@ int main() {
     return 0;
 }
 
-//Way to trigger the backdoor: make one none registered entry for the username and then type in the has below (it is test hashed with sha256) then enter the same username again und put "test" as password -> successfully logged in
+//Way to trigger the backdoor: make one none registered entry for the username and then type in the hash below (it is test hashed with sha256) then enter the same username again und put "test" as password -> successfully logged in
 //test
 //9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
